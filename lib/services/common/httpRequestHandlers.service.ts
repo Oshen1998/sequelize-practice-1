@@ -38,3 +38,13 @@ export function UnprocessableEntityHandler(res: Response, message?: string, info
         info
       });
 }
+
+export function DuplicateInformationHandler(res: Response,message?:string, info?:any) {
+  return res
+    .status(ResponseCodesEnum.DUPLICATED_DATA)
+    .json({
+      status: ResponseCodesEnum.DUPLICATED_DATA,
+      message:  message ?? "DUPLICATED DATA",
+      info
+    });
+}

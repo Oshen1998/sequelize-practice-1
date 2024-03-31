@@ -4,40 +4,48 @@ import {
   Column,
   Model,
   PrimaryKey,
-  Default,
   DataType,
   AutoIncrement,
-  Unique,
   Validate,
+  BeforeValidate,
+  Unique,
 } from "sequelize-typescript";
 import { IRegistration } from "./auth.interface";
-
+import * as uuid from 'uuidv4';
 @Table({
   tableName: "auth",
-  initialAutoIncrement: "0000",
-})
+  initialAutoIncrement: "00000"
+ })
 export class AuthModel extends Model<IRegistration> {
+  @BeforeValidate
+  static generateUUID(instance: AuthModel) {
+      if (!instance.userId) {
+          instance.userId = uuid.uuid();
+      }
+  }
+
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
   id!: number;
 
-  // @PrimaryKey
-  // @Default(DataType.UUIDV4)
-  // @Unique
-  // @Column(DataType.UUIDV4)
-  // id!: any;
+  @Unique
+  @Column
+  userId!: string;
 
   @Column
   fullName!: string;
 
-  @Validate({isEmail: true})
+  @Validate({ isEmail: true })
   @Column(DataType.TEXT)
   email!: string;
 
-  @Validate({is:[NIC_REGEX]})
+  @Validate({ is: [NIC_REGEX] })
   @Column(DataType.TEXT)
   nic!: string;
+
+  @Column(DataType.TEXT)
+  password!: string;
 
   @Column
   createdAt!: Date;

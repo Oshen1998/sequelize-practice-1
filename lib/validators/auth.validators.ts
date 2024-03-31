@@ -8,13 +8,4 @@ export const RegistrationSchema = {
     password: { type: "string" },
   },
   additionalProperties: false,
-  errorMessage: {
-    type: "should be an object",
-    required: {
-        fullName: 'Full name is required!',
-        email: 'Email is required!"',
-        nic: 'NIC is required!',
-        password: 'Password is required!',
-    },
-  },
 };

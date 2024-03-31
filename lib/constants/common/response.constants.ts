@@ -3,6 +3,7 @@ export enum ResponseCodesEnum  {
     BAD_REQUEST = 400,
     INTERNAL_SERVER_ERROR = 500,
     UNPROCESSABLE_ENTITY = 422,
+    DUPLICATED_DATA = 409,
     NOT_FOUND = 404,
     FORBIDDEN = 403
 }

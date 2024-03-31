@@ -1,5 +1,6 @@
 export interface IRegistration {
-    id?: string;
+    id?: any;
+    userId: string
     fullName: string;
     email: string;
     nic: string;

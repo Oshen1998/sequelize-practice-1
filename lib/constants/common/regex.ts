@@ -1,0 +1,1 @@
+export const NIC_REGEX = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/

@@ -1,38 +1,35 @@
 "use strict";
 import Ajv from "ajv";
-import { IRegistration } from "./../models/auth/auth.interface";
-import { RegistrationSchema } from "./../validators/auth.validators";
 import {
-    SuccessResponseHandler,
-    UnprocessableEntityHandler,
-} from "./../services/common/httpRequestHandlers.service";
+  SuccessResponseHandler,
+  UnprocessableEntityHandler,
+} from "../services/common/requestHandler.service";
 import { Request, Response } from "express";
 import { AuthServices } from "./../services/database/auth.service";
+import { IRegistrationRequest } from "models/auth/auth.interface";
 
 export class AuthController {
-    private ajv = new Ajv();
-    private authService: AuthServices = new AuthServices();
+  private ajv = new Ajv();
+  private authService: AuthServices = new AuthServices();
 
-    public userRegistration(req: Request, res: Response) {
-        const payload = req.body;
-        // const validator = this.ajv.compile(payload);
-        const isValid = true;
+  public userRegistration(req: Request, res: Response) {
+    const payload = req.body;
+    const validator = this.ajv.compile(payload);
+    const isValid = true;
 
-        if (isValid) {
-            this.authService.createUser(
-                payload as IRegistration,
-                (response, error) => {
-                    if (response && !error) {
-                        SuccessResponseHandler(res, response, "User Created Successfully!");
-                    } else {
-                        UnprocessableEntityHandler(res, 'ER_BAD_FIELD_ERROR', error);
-                    }
-                    console.log(JSON.stringify(response, null, 2));
-
-                }
-            );
-        } else {
-            UnprocessableEntityHandler(res);
+    if (isValid) {
+      this.authService.createUser(
+        payload as IRegistrationRequest,
+        (response, error) => {
+          if (response && !error) {
+            SuccessResponseHandler(res, response, "User Created Successfully!");
+          } else {
+            UnprocessableEntityHandler(res, "ER_BAD_FIELD_ERROR", error);
+          }
         }
+      );
+    } else {
+      UnprocessableEntityHandler(res);
     }
+  }
 }

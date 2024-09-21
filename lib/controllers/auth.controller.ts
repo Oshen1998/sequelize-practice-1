@@ -14,7 +14,6 @@ export class AuthController {
 
   public userRegistration(req: Request, res: Response) {
     const payload = req.body;
-    const validator = this.ajv.compile(payload);
     const isValid = true;
 
     if (isValid) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { AuthModel } from "./../models/auth/auth.model";
 import { Sequelize } from "sequelize-typescript";
 require("dotenv").config();

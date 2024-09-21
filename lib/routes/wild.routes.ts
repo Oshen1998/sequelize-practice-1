@@ -1,5 +1,5 @@
 import { ResponseCodesEnum } from "../constants/common/response.constants";
-import { Application, Request, Response } from "express";
+import { Application, Response } from "express";
 
 class WildRoutes {
   public route(app: Application) {
